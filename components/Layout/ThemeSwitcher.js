@@ -22,12 +22,12 @@ export default function ThemeSwitcher() {
   };
 
   return (
-    <button>
-      {enabled ? (
-        <FiSun size={27} onClick={toggleDarkMode} />
-      ) : (
-        <FiMoon size={27} onClick={toggleDarkMode} />
-      )}
+    <button
+      type="button"
+      onClick={toggleDarkMode}
+      aria-label={enabled ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      {enabled ? <FiSun size={27} /> : <FiMoon size={27} />}
     </button>
   );
 }
