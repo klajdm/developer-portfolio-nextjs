@@ -5,12 +5,19 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false,
+  darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        accent: {
+          DEFAULT: "#86906F",
+          dark: "#a1b378",
+          hover: "#90a06a",
+          light: "#c3d697",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -18,6 +25,5 @@ module.exports = {
       },
     },
   },
-  darkMode: "class",
   plugins: [nextui()],
 };
