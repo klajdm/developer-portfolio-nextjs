@@ -6,7 +6,10 @@ import Typewriter from "typewriter-effect";
 
 export default function Hero({ bio }) {
   const imageStyle = {
-    backgroundImage: `url(${bio.map((info) => urlFor(info.image).url())})`,
+    backgroundImage:
+      urlFor && bio?.length
+        ? `url(${bio.map((info) => urlFor(info.image).url())})`
+        : undefined,
   };
 
   return (
