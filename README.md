@@ -1,205 +1,145 @@
 # Developer Portfolio
 
-A modern, responsive developer portfolio website built with Next.js and Sanity CMS, featuring beautiful animations and a dark/light theme toggle.
+A responsive developer portfolio built with Next.js and Sanity CMS. Supports dark/light mode, animated backgrounds, a project showcase, skills section, resume page, and a contact form.
 
-## 🌟 Features
+## Stack
 
-- **Responsive Design**: Optimized for all device sizes
-- **Dark/Light Mode**: Theme switcher for user preference
-- **Content Management**: Sanity CMS integration for easy content updates
-- **Modern Animations**: Smooth animations using Framer Motion
-- **Interactive Effects**: Particle backgrounds and typewriter effects
-- **Contact Form**: Functional contact form for inquiries
-- **Project Showcase**: Dynamic project gallery
-- **Skills Section**: Interactive skills display
-- **Resume/CV Page**: Dedicated resume section
+- **Next.js 13** — SSG with ISR
+- **Tailwind CSS** + **NextUI** — styling
+- **Sanity CMS** — content (bio, skills, projects)
+- **Framer Motion** — animations
+- **react-tsparticles** — particle background
+- **typewriter-effect** — hero typing animation
+- **react-hook-form** — contact form
+- **next-themes** — dark/light toggle
 
-## 🛠️ Tech Stack
-
-### Frontend
-- **Next.js 13** - React framework with SSG/SSR
-- **React 18** - JavaScript library for building user interfaces
-- **Tailwind CSS** - Utility-first CSS framework
-- **NextUI** - Modern React UI library
-- **Framer Motion** - Animation library
-- **React Icons** - Icon library
-
-### Content Management
-- **Sanity CMS** - Headless CMS for content management
-- **Sanity Image URL** - Image optimization and transformation
-
-### Styling & UI
-- **Tailwind CSS** - Main styling framework
-- **Custom Fonts**: Azonix, Nunito, and Poppins
-- **next-themes** - Theme switching functionality
-
-### Interactive Elements
-- **React Simple Typewriter** - Typewriter text effects
-- **React Scroll** - Smooth scrolling navigation
-- **React Tilt** - 3D tilt effects
-- **Particles BG** - Particle background animations
-- **React Hook Form** - Form management
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── components/
-│   ├── About.js          # About section component
-│   ├── Contact.js        # Contact section component
-│   ├── ContactForm.js    # Contact form component
-│   ├── ContactItems.js   # Contact information display
-│   ├── Hero.js           # Hero/landing section
-│   ├── Project.js        # Projects showcase component
-│   ├── Skill.js          # Skills display component
+│   ├── About.js
+│   ├── Contact.js
+│   ├── ContactForm.js
+│   ├── ContactItems.js
+│   ├── Hero.js
+│   ├── Project.js
+│   ├── Skill.js
 │   └── Layout/
-│       ├── Footer.js     # Site footer
-│       ├── Layout.js     # Main layout wrapper
-│       ├── Navbar.js     # Navigation component
-│       └── ThemeSwitcher.js # Dark/light mode toggle
-├── pages/
-│   ├── _app.js           # Next.js app configuration
-│   ├── _document.js      # HTML document structure
-│   ├── index.js          # Homepage
-│   ├── projects.js       # Projects page
-│   ├── resume.js         # Resume/CV page
-│   └── api/
-│       └── hello.js      # API endpoint example
+│       ├── Footer.js
+│       ├── Layout.js
+│       ├── Navbar.js
+│       └── ThemeSwitcher.js
 ├── config/
-│   └── sanity.config.js  # Sanity CMS configuration
+│   ├── sanity.config.js   # Sanity client
+│   └── site.config.js     # Personal info & social links
+├── pages/
+│   ├── index.js
+│   ├── projects.js
+│   ├── resume.js
+│   └── 404.js
 ├── styles/
-│   ├── globals.css       # Global styles
-│   ├── custom.css        # Custom component styles
-│   └── hero.css          # Hero section specific styles
-├── assets/               # Font files and static assets
-└── public/               # Static files and favicon
+│   ├── globals.css
+│   ├── custom.css
+│   └── hero.css
+├── assets/                # Custom fonts
+└── public/                # Static files
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
-- npm or yarn
-- Sanity account and project
 
-### Installation
+- Node.js 16+
+- A [Sanity](https://sanity.io) account and project
 
-1. **Clone the repository**
+### Setup
+
+1. Clone and install:
+
    ```bash
    git clone <repository-url>
    cd developer-portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
    npm install
-   # or
-   yarn install
    ```
 
-3. **Environment Setup**
-   Create a `.env.local` file in the root directory:
+2. Create `.env.local`:
+
    ```env
-   SANITY_PROJECT_ID=your_sanity_project_id
-   SANITY_DATASET=your_sanity_dataset
+   SANITY_PROJECT_ID=your_project_id
+   SANITY_DATASET=production
    ```
 
-4. **Run the development server**
+3. Update `config/site.config.js` with your name, email, social links, and typewriter strings.
+
+4. Add your resume PDF at `public/resume.pdf`.
+
+5. Start the dev server:
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+## Sanity CMS
 
-### Sanity CMS Setup
+Create the following document types in your Sanity studio:
 
-1. **Create a Sanity project**
-   - Go to [sanity.io](https://sanity.io)
-   - Create a new project
-   - Note your project ID and dataset name
+**`bio`**
+| Field | Type | Description |
+|-------|------|-------------|
+| `info` | string | Short intro text shown in the Hero |
+| `image` | image | Profile photo |
 
-2. **Configure content schemas**
-   Set up the following content types in your Sanity studio:
-   - `bio` - Personal information and profile image
-   - `skill` - Technical skills with icons/images
-   - `project` - Project details, images, and links
+**`skill`**
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Skill name (shown as tooltip) |
+| `image` | image | Skill icon |
 
-3. **Update environment variables**
-   Add your Sanity project credentials to `.env.local`
+**`project`**
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Project name |
+| `summary` | string | Short description |
+| `note` | string | Optional footnote |
+| `technologies` | array of string | Tech stack |
+| `image` | image | Preview screenshot |
+| `linkToDeployment` | url | Live URL |
+| `linkToBuild` | url | Source code URL |
 
-## 📝 Content Management
+## Customization
 
-The portfolio uses Sanity CMS for content management. You can update:
+All personal information lives in two places:
 
-- **Bio/Profile**: Personal information, profile image, and introduction
-- **Skills**: Technical skills with proficiency levels and icons
-- **Projects**: Project details, screenshots, technologies used, and links
-- **Contact Information**: Contact details and social media links
+- **`config/site.config.js`** — name, email, social links, typewriter strings, resume file path
+- **Sanity CMS** — bio text, profile image, skills, projects
 
-## 🎨 Customization
+Accent colors (`#86906F` / `#a1b378`) are defined as `accent` tokens in `tailwind.config.js`.
 
-### Themes
-The portfolio supports dark and light themes. Customize colors in:
-- `tailwind.config.js` - Tailwind configuration
-- `styles/globals.css` - Global theme variables
+## Deployment
 
-### Fonts
-Custom fonts are located in the `assets/` directory:
-- **Azonix** - Display font
-- **Nunito** - Body text
-- **Poppins** - Headings and emphasis
+**Vercel (recommended):**
 
-### Animations
-Framer Motion animations can be customized in individual components for:
-- Page transitions
-- Element reveals
-- Interactive hover effects
+1. Push to GitHub and connect the repo to Vercel.
+2. Add `SANITY_PROJECT_ID` and `SANITY_DATASET` in the Vercel dashboard.
+3. Deploy — ISR will keep content fresh without full rebuilds.
 
-## 🚀 Deployment
+**Other platforms (Render, Railway, etc.):**
 
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically on every push
-
-### Netlify
-1. Build the project: `npm run build`
-2. Deploy the `out/` folder to Netlify
-3. Configure environment variables in Netlify dashboard
-
-### Manual Deployment
 ```bash
 npm run build
 npm run start
 ```
 
-## 📱 Pages
+Set the same two environment variables on the platform.
 
-- **Home** (`/`) - Hero, About, and Contact sections
-- **Projects** (`/projects`) - Detailed project showcase
-- **Resume** (`/resume`) - CV/Resume page
+## Pages
 
-## 🤝 Contributing
+| Route       | Description              |
+| ----------- | ------------------------ |
+| `/`         | Hero, About, and Contact |
+| `/projects` | Project showcase         |
+| `/resume`   | Resume / CV viewer       |
+| `/404`      | Custom 404 page          |
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## License
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👨‍💻 Author
-
-**Klajdi Murataj**
-- GitHub: [@klajdm](https://github.com/klajdm)
-- LinkedIn: [[Klajdi Murataj](https://www.linkedin.com/in/klajdi-murataj-511617285/)]
-
----
-
-⭐ Don't forget to star this repository if you found it helpful!
+[MIT](LICENSE)
