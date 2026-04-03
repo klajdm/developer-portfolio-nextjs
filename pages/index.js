@@ -2,10 +2,15 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import { sanityClient } from "@/config/sanity.config";
+import { siteConfig } from "@/config/site.config";
+import Head from "next/head";
 
 export default function Home({ skills, bio }) {
   return (
     <>
+      <Head>
+        <title>{siteConfig.name} - Portfolio</title>
+      </Head>
       {/* Hero */}
       <section id="hero" className="relative">
         <Hero bio={bio} />
@@ -38,6 +43,7 @@ export async function getStaticProps() {
         skills,
         bio,
       },
+      revalidate: 60,
     };
   } catch (error) {
     // Handle any errors that may occur during data fetching
@@ -47,6 +53,7 @@ export async function getStaticProps() {
         skills: [],
         bio: [],
       },
+      revalidate: 60,
     };
   }
 }

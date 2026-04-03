@@ -1,5 +1,6 @@
 import Project from "@/components/Project";
 import { sanityClient } from "@/config/sanity.config";
+import { siteConfig } from "@/config/site.config";
 import Head from "next/head";
 import React from "react";
 
@@ -7,7 +8,7 @@ export default function Projects({ projects }) {
   return (
     <>
       <Head>
-        <title>Klajdi Murataj - Projects</title>
+        <title>{siteConfig.name} - Projects</title>
       </Head>
       <Project projects={projects} />
     </>
@@ -29,6 +30,7 @@ export async function getStaticProps() {
       props: {
         projects,
       },
+      revalidate: 60,
     };
   } catch (error) {
     // Handle any errors that may occur during data fetching
@@ -37,6 +39,7 @@ export async function getStaticProps() {
       props: {
         projects: [],
       },
+      revalidate: 60,
     };
   }
 }
