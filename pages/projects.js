@@ -6,7 +6,7 @@ import React from "react";
 export default function Projects({ projects }) {
   return (
     <>
-    <Head>
+      <Head>
         <title>Klajdi Murataj - Projects</title>
       </Head>
       <Project projects={projects} />
@@ -15,11 +15,14 @@ export default function Projects({ projects }) {
 }
 
 export async function getStaticProps() {
+  if (!sanityClient) {
+    return { props: { projects: [] } };
+  }
   try {
     const client = sanityClient;
     // Fetch data for skills, bio, and projects using the Sanity client
     const projects = await client.fetch(
-      `*[_type=='project'] | order(_createdAt)`
+      `*[_type=='project'] | order(_createdAt)`,
     );
 
     return {

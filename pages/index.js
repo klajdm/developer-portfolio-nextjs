@@ -25,6 +25,9 @@ export default function Home({ skills, bio }) {
 }
 
 export async function getStaticProps() {
+  if (!sanityClient) {
+    return { props: { skills: [], bio: [] } };
+  }
   try {
     const client = sanityClient;
     // Fetch data for skills, bio, and projects using the Sanity client
@@ -41,8 +44,8 @@ export async function getStaticProps() {
     console.error("Error fetching data:", error);
     return {
       props: {
-        skills: [], // Return empty arrays or default values for each property if there's an error
-        bio: {},
+        skills: [],
+        bio: [],
       },
     };
   }
