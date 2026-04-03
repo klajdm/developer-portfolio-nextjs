@@ -27,6 +27,11 @@ export default function Project({ projects }) {
         viewport={{ once: true }}
         className="space-y-10 flex flex-col justify-center items-center"
       >
+        {projects?.length === 0 && (
+          <p className="text-gray-500 dark:text-gray-400 text-center">
+            No projects to display yet.
+          </p>
+        )}
         {projects?.map((project) => (
           <div
             key={project._id}
@@ -34,46 +39,73 @@ export default function Project({ projects }) {
           >
             <div className="md:w-[70%] lg:w-full flex flex-col justify-center items-center lg:flex-row lg:space-x-10 lg:py-[5rem] bg-white/50 dark:bg-zinc-500/50 rounded-lg p-4 lg:p-10 shadow">
               <div className=" flex items-center ">
-                <Link href={project.linkToDeployment} target="_blank">
-                  {urlFor && project.image && (
+                {project.linkToDeployment ? (
+                  <Link href={project.linkToDeployment} target="_blank">
+                    {urlFor && project.image && (
+                      <Image
+                        src={urlFor(project.image).url()}
+                        width={600}
+                        height={400}
+                        alt={project.title ?? "Project Preview"}
+                        className="rounded-lg hover:scale-105 transition-all duration-300"
+                      />
+                    )}
+                  </Link>
+                ) : (
+                  urlFor &&
+                  project.image && (
                     <Image
                       src={urlFor(project.image).url()}
                       width={600}
                       height={400}
-                      alt="Project Preview Image"
-                      className="rounded-lg hover:scale-105 transition-all duration-300"
+                      alt={project.title ?? "Project Preview"}
+                      className="rounded-lg"
                     />
-                  )}
-                </Link>
+                  )
+                )}
               </div>
               <div className="lg:max-w-[40%] space-y-5 mt-5 md:space-y-10">
                 <h3 className="text-center text-2xl font-semibold tracking-wide">
                   {project.title}
                 </h3>
                 <p className="md:text-lg">{project.summary}</p>
-                <p className="text-sm md:text-base">
-                  <strong>*</strong>
-                  {project.note}
-                </p>
-                <div>
-                  <p>
-                    <span className="font-semibold">Stack</span>:{" "}
-                    {project.technologies.join(", ")}
+                {project.note && (
+                  <p className="text-sm md:text-base">
+                    <strong>*</strong>
+                    {project.note}
                   </p>
-                </div>
+                )}
+                {project.technologies?.length > 0 && (
+                  <div>
+                    <p>
+                      <span className="font-semibold">Stack</span>:{" "}
+                      {project.technologies.join(", ")}
+                    </p>
+                  </div>
+                )}
                 <div className="flex space-x-10 items-center justify-center">
-                  <Link href={project.linkToDeployment} target="_blank">
-                    <button className="project-btn">
+                  {project.linkToDeployment && (
+                    <Link
+                      href={project.linkToDeployment}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-btn"
+                    >
                       <CgWebsite />
                       <span>See Live</span>
-                    </button>
-                  </Link>
-                  <Link href={project.linkToBuild} target="_blank">
-                    <button className="project-btn">
+                    </Link>
+                  )}
+                  {project.linkToBuild && (
+                    <Link
+                      href={project.linkToBuild}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-btn"
+                    >
                       <TbSourceCode />
                       <span>Source</span>
-                    </button>
-                  </Link>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
