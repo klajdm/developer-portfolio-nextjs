@@ -1,8 +1,10 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
-import { FiExternalLink, FiMenu } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { Menu, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { siteConfig } from "@/config/site.config";
 
 const links = [
   { key: 1, href: "/", label: "Home" },
@@ -13,29 +15,40 @@ const links = [
 ];
 
 export default function Navbar() {
+  const { pathname } = useRouter();
+
+  const isActive = (href) => {
+    if (href.includes("#")) return false;
+    return pathname === href;
+  };
+
   return (
     <nav className="fixed left-0 top-0 w-full z-[999]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] bg-white text-black px-4 py-2 rounded"
+      >
+        Skip to main content
+      </a>
       <div className=" flex justify-between items-center px-5 lg:px-10 bg-white/80 shadow backdrop-blur-[3px] dark:bg-zinc-800/80">
         <div className="text-lg md:text-2xl font-[Azonix] uppercase">
           <Link href="/">
-            <span>{"<"}</span>Klajdi Murataj <span>{"/>"}</span>
+            <span>{"<"}</span>
+            {siteConfig.name} <span>{"/>"}</span>
           </Link>
         </div>
         <div className="flex items-center h-16 space-x-5">
           <ul className="relative hidden h-full items-center lg:flex space-x-6 text-lg">
             {links.map((link) => (
-              <Link className="nav-link" key={link.key} href={link.href}>
+              <Link
+                className={`nav-link ${isActive(link.href) ? "nav-link-active" : ""}`}
+                key={link.key}
+                href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
                 <li>{link.label}</li>
               </Link>
             ))}
-            {/* <Link
-              href="https://github.com/klajdm"
-              target="_blank"
-              className="nav-link space-x-1"
-            >
-              <li>Source</li>
-              <FiExternalLink size={13} />
-            </Link> */}
           </ul>
           <div className="flex justify-center items-center">
             <ThemeSwitcher />
@@ -57,14 +70,16 @@ export default function Navbar() {
                 <Menu.Items className="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-y-auto dark:bg-zinc-700">
                   <div className="p-1">
                     {links.map((link) => (
-                      /* Use the `active` state to conditionally style the active item. */
                       <Menu.Item key={link.href} as={Fragment}>
                         {({ active }) => (
                           <Link
                             href={link.href}
+                            aria-current={
+                              isActive(link.href) ? "page" : undefined
+                            }
                             className={`group flex w-full justify-center rounded-lg items-center px-4 py-2 text-base ${
-                              active
-                                ? "bg-[#c3d697] text-gray-900  dark:text-white"
+                              active || isActive(link.href)
+                                ? "bg-[#c3d697] text-gray-900 dark:text-white"
                                 : "text-gray-600 dark:text-white"
                             }`}
                           >
@@ -73,25 +88,6 @@ export default function Navbar() {
                         )}
                       </Menu.Item>
                     ))}
-                    {/* <Menu.Item>
-                      <hr></hr>
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href="https://github.com/klajdm"
-                          target="_blank"
-                          className={`group flex w-full justify-center rounded-lg px-4 py-2 text-base ${
-                            active
-                              ? "bg-[#c3d697] text-gray-900  "
-                              : "text-gray-600"
-                          }`}
-                        >
-                          <hr></hr>
-                          Source <FiExternalLink size={13} className="ml-1" />
-                        </Link>
-                      )}
-                    </Menu.Item> */}
                   </div>
                 </Menu.Items>
               </Transition>

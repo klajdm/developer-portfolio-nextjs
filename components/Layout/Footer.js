@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { HiMiniHome } from "react-icons/hi2";
+import { siteConfig } from "@/config/site.config";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -8,16 +9,21 @@ export default function Footer() {
   };
   return (
     <footer className="relative">
-      <div onClick={scrollToTop} className="block">
+      <button
+        type="button"
+        onClick={scrollToTop}
+        className="scroll-top"
+        aria-label="Scroll to top"
+      >
         <div className=" flex justify-center items-center w-[40px] h-[40px] rounded-full dark:text-black dark:hover:text-white">
           <HiMiniHome size={20} />
         </div>
-      </div>
+      </button>
       <div className="relative flex w-full justify-center text-xs py-4 bg-white dark:bg-zinc-700">
         <p>
-          © Copyright 2023. Made by{" "}
+          &copy; Copyright {new Date().getFullYear()}. Made by{" "}
           <span className="underline font-bold">
-            <Link href="/">Klajdi Murataj</Link>
+            <Link href="/">{siteConfig.name}</Link>
           </span>
         </p>
       </div>

@@ -1,30 +1,24 @@
 # Security Policy
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-If you discover a security vulnerability in this project, please follow these steps:
+Please **do not open a public issue** for security vulnerabilities.
 
-1. **Do not create a public issue.**
-2. Email the maintainer directly at: klajdm@gmail.com
-3. Include:
-   - A description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Any suggested fixes
+Instead, open a [GitHub Security Advisory](https://github.com/your-username/developer-portfolio/security/advisories/new) or email the maintainer directly (address in the repository profile). Include:
 
-We will review your report promptly and work to resolve the issue as soon as possible. Once resolved, we will disclose the vulnerability and fix in a responsible manner.
+- A description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Any suggested fixes
 
-## Supported Versions
+We aim to respond within 48 hours and will coordinate a fix and disclosure timeline with you.
 
-| Version | Supported          |
-| ------- | ----------------- |
-| 1.x     | ✅                |
-| <1.0.0  | ❌                |
+## Supported versions
 
-## Best Practices
-- Keep your dependencies up to date
-- Do not expose sensitive credentials in public repositories
-- Use environment variables for secrets
-- Review third-party packages for security
+Only the latest release is actively maintained.
 
-Thank you for helping keep this project secure!
+## Best practices for contributors
+
+- Never commit credentials, tokens, or `.env` files
+- Keep dependencies up to date (`npm audit` is a good start)
+- Review any new third-party packages before adding them

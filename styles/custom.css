@@ -79,7 +79,8 @@
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-.block {
+.scroll-top {
+  display: block;
   position: relative;
   margin: 10px auto;
   width: 40px;
@@ -89,8 +90,8 @@
   cursor: pointer;
 }
 
-.block:before,
-.block:after {
+.scroll-top:before,
+.scroll-top:after {
   content: "";
   position: absolute;
   left: -2px;
@@ -110,7 +111,7 @@
   }
 }
 
-.block:hover {
+.scroll-top:hover {
   background: #90a06a;
   color: #fff;
   scale: 1.1;
@@ -118,8 +119,8 @@
   transition-duration: 300ms;
 }
 
-.block:hover:before,
-.block:hover:after {
+.scroll-top:hover:before,
+.scroll-top:hover:after {
   /* Remove the animation on hover */
   background-image: none;
 }
