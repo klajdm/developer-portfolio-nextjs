@@ -8,7 +8,7 @@ export default function Projects({ projects }) {
   return (
     <>
       <Head>
-        <title>{siteConfig.name} - Projects</title>
+        <title>{`${siteConfig.name} - Projects`}</title>
       </Head>
       <Project projects={projects} />
     </>

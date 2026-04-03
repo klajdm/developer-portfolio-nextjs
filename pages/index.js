@@ -9,7 +9,7 @@ export default function Home({ skills, bio }) {
   return (
     <>
       <Head>
-        <title>{siteConfig.name} - Portfolio</title>
+        <title>{`${siteConfig.name} - Portfolio`}</title>
       </Head>
       {/* Hero */}
       <section id="hero" className="relative">

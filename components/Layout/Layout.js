@@ -129,7 +129,7 @@ export default function Layout({ children }) {
         />
       </div>
       <Head>
-        <title>{siteConfig.name} - Portfolio</title>
+        <title>{`${siteConfig.name} - Portfolio`}</title>
         <meta name="description" content={siteConfig.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:type" content="website" />

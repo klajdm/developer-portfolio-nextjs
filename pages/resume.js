@@ -10,7 +10,7 @@ export default function Resume() {
   return (
     <>
       <Head>
-        <title>{siteConfig.name} - Resume</title>
+        <title>{`${siteConfig.name} - Resume`}</title>
       </Head>
       <div className="min-h-screen relative flex flex-col items-center md:justify-center ">
         <h1 className="relative custom-h1 font-[NunitoMD] text-center w-fit my-10 dark:text-white">

@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <>
       <Head>
-        <title>404 - Page Not Found | {siteConfig.name}</title>
+        <title>{`404 - Page Not Found | ${siteConfig.name}`}</title>
       </Head>
       <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-center px-4">
         <h1 className="text-8xl font-[Azonix] text-[#86906F] dark:text-[#a1b378]">
